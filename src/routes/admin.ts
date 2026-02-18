@@ -211,4 +211,147 @@ router.get('/orders/stats', authenticateToken, authorizeRole(['admin']), async (
   }
 });
 
+router.get('/products', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const db = getFirestoreDb();
+    const limit = Math.min(parseInt(req.query.limit as string) || 100, 500);
+    const offset = parseInt(req.query.offset as string) || 0;
+
+    const snapshot = await db
+      .collection('products')
+      .orderBy('createdAt', 'desc')
+      .limit(limit)
+      .offset(offset)
+      .get();
+
+    const products = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    res.json({
+      success: true,
+      data: products,
+      pagination: { limit, offset },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
+router.get('/products/count', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const db = getFirestoreDb();
+    const snapshot = await db.collection('products').count().get();
+
+    res.json({
+      success: true,
+      data: {
+        totalProducts: snapshot.data().count,
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
+router.delete('/products/:productId', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const db = getFirestoreDb();
+
+    await db.collection('products').doc(productId).delete();
+
+    res.json({
+      success: true,
+      data: { message: 'Product deleted' },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
+router.put('/products/:productId', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const db = getFirestoreDb();
+
+    const updateData = {
+      ...req.body,
+      updatedAt: new Date(),
+    };
+
+    await db.collection('products').doc(productId).update(updateData);
+
+    const updated = await db.collection('products').doc(productId).get();
+
+    res.json({
+      success: true,
+      data: {
+        id: productId,
+        ...updated.data(),
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
+router.get('/dashboard', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const db = getFirestoreDb();
+
+    const [ordersSnapshot, productsSnapshot, cashiersSnapshot] = await Promise.all([
+      db.collection('orders').get(),
+      db.collection('products').get(),
+      db.collection('cashiers').get(),
+    ]);
+
+    const orders = ordersSnapshot.docs.map((doc) => doc.data());
+
+    const dashboard = {
+      totalOrders: orders.length,
+      totalRevenue: orders.reduce((sum, order) => sum + (order.total || 0), 0),
+      totalProducts: productsSnapshot.size,
+      totalCashiers: cashiersSnapshot.size,
+      recentOrders: orders.slice(0, 5),
+      ordersByStatus: {
+        draft: orders.filter((o) => o.status === 'draft').length,
+        pending: orders.filter((o) => o.status === 'pending').length,
+        confirmed: orders.filter((o) => o.status === 'confirmed').length,
+        paid: orders.filter((o) => o.status === 'paid').length,
+        ready: orders.filter((o) => o.status === 'ready').length,
+        delivered: orders.filter((o) => o.status === 'delivered').length,
+      },
+    };
+
+    res.json({
+      success: true,
+      data: dashboard,
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
 export default router;

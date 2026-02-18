@@ -195,4 +195,56 @@ router.get('/history/:clientId', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/profile/:clientId', async (req: Request, res: Response) => {
+  try {
+    const { clientId } = req.params;
+    const { email, phone } = req.body;
+    const db = getFirestoreDb();
+
+    const clientRef = db.collection('clients').doc(clientId);
+    const clientDoc = await clientRef.get();
+
+    if (!clientDoc.exists) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Client not found' },
+      });
+    }
+
+    const updateData: any = {
+      updatedAt: new Date(),
+    };
+
+    if (email) {
+      updateData.email = email.toLowerCase().trim();
+    }
+    if (phone) {
+      updateData.phone = phone.trim();
+    }
+
+    await clientRef.update(updateData);
+
+    const updated = await clientRef.get();
+    const data = updated.data();
+
+    res.json({
+      success: true,
+      data: {
+        clientId,
+        email: data?.email,
+        phone: data?.phone,
+        loyaltyPoints: data?.loyaltyPoints || 0,
+        totalOrders: data?.totalOrders || 0,
+        totalSpent: data?.totalSpent || 0,
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message, code: err.code },
+    });
+  }
+});
+
 export default router;

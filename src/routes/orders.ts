@@ -353,4 +353,97 @@ router.post('/:orderId/close', async (req: Request, res: Response) => {
   }
 });
 
+router.post('/:orderId/checkout', async (req: Request, res: Response) => {
+  try {
+    const { orderId } = req.params;
+    const { paymentMethod, notes } = validateRequest(closeOrderSchema, req.body);
+
+    const order = await OrderModel.getById(orderId);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Order not found' },
+      });
+    }
+
+    if (order.items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: { message: 'Cannot checkout an empty order' },
+      });
+    }
+
+    if (order.status !== 'draft') {
+      return res.status(400).json({
+        success: false,
+        error: { message: 'Order is not in draft status' },
+      });
+    }
+
+    order.status = 'pending';
+    order.paymentMethod = (paymentMethod as any) || 'cash';
+    order.notes = notes;
+    order.updatedAt = new Date();
+
+    const updated = await OrderModel.update(orderId, order);
+
+    res.json({
+      success: true,
+      data: {
+        orderId: updated.id,
+        status: 'pending',
+        total: updated.total,
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message, code: err.code },
+    });
+  }
+});
+
+router.post('/:orderId/payment', async (req: Request, res: Response) => {
+  try {
+    const { orderId } = req.params;
+    const order = await OrderModel.getById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Order not found' },
+      });
+    }
+
+    if (order.status === 'draft') {
+      return res.status(400).json({
+        success: false,
+        error: { message: 'Order must be closed before payment' },
+      });
+    }
+
+    order.paymentStatus = 'completed';
+    order.status = 'paid';
+    order.updatedAt = new Date();
+
+    const updated = await OrderModel.update(orderId, order);
+
+    res.json({
+      success: true,
+      data: {
+        orderId: updated.id,
+        status: 'paid',
+        paymentStatus: 'completed',
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message, code: err.code },
+    });
+  }
+});
+
 export default router;
