@@ -142,6 +142,42 @@ router.post('/products', authenticateToken, authorizeRole(['admin']), async (req
   }
 });
 
+router.get('/orders', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const db = getFirestoreDb();
+    const status = (req.query.status as string) || 'all';
+    const limit = Math.min(parseInt(req.query.limit as string) || 50, 100);
+    const offset = parseInt(req.query.offset as string) || 0;
+
+    let query: any = db.collection('orders').orderBy('createdAt', 'desc');
+
+    if (status !== 'all') {
+      query = query.where('status', '==', status);
+    }
+
+    const snapshot = await query.limit(limit + 1).offset(offset).get();
+
+    const orders = snapshot.docs.map((doc: any) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate?.() || doc.data().createdAt,
+      updatedAt: doc.data().updatedAt?.toDate?.() || doc.data().updatedAt,
+    }));
+
+    res.json({
+      success: true,
+      data: orders,
+      pagination: { limit, offset },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
 router.get('/orders/stats', authenticateToken, authorizeRole(['admin']), async (req: AuthenticatedRequest, res: Response) => {
   try {
     const db = getFirestoreDb();

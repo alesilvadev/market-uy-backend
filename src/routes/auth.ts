@@ -123,4 +123,76 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/profile/:clientId', async (req: Request, res: Response) => {
+  try {
+    const { clientId } = req.params;
+    const db = getFirestoreDb();
+
+    const doc = await db.collection('clients').doc(clientId).get();
+
+    if (!doc.exists) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Client not found' },
+      });
+    }
+
+    const clientData = doc.data();
+    res.json({
+      success: true,
+      data: {
+        clientId: doc.id,
+        email: clientData?.email,
+        phone: clientData?.phone,
+        loyaltyPoints: clientData?.loyaltyPoints || 0,
+        totalOrders: clientData?.totalOrders || 0,
+        totalSpent: clientData?.totalSpent || 0,
+        createdAt: clientData?.createdAt,
+      },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message, code: err.code },
+    });
+  }
+});
+
+router.get('/history/:clientId', async (req: Request, res: Response) => {
+  try {
+    const { clientId } = req.params;
+    const limit = Math.min(parseInt(req.query.limit as string) || 50, 100);
+    const offset = parseInt(req.query.offset as string) || 0;
+    const db = getFirestoreDb();
+
+    const snapshot = await db
+      .collection('orders')
+      .where('clientId', '==', clientId)
+      .orderBy('createdAt', 'desc')
+      .limit(limit + 1)
+      .offset(offset)
+      .get();
+
+    const orders = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate?.() || doc.data().createdAt,
+      updatedAt: doc.data().updatedAt?.toDate?.() || doc.data().updatedAt,
+    }));
+
+    res.json({
+      success: true,
+      data: orders,
+      pagination: { limit, offset },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message, code: err.code },
+    });
+  }
+});
+
 export default router;

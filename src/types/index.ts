@@ -40,6 +40,17 @@ export interface Order {
   notes?: string;
 }
 
+export interface Client {
+  id: string;
+  email?: string;
+  phone?: string;
+  loyaltyPoints: number;
+  totalOrders: number;
+  totalSpent: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Cashier {
   id: string;
   email: string;
