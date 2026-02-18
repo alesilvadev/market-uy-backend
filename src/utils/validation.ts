@@ -36,6 +36,40 @@ export const verifyOrderSchema = Joi.object({
   orderId: Joi.string().required(),
 });
 
+export const createCashierSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required().min(6),
+  name: Joi.string().required(),
+  role: Joi.string().optional().valid('cashier', 'admin'),
+});
+
+export const batchImportProductsSchema = Joi.object({
+  products: Joi.array()
+    .items(
+      Joi.object({
+        code: Joi.string().required().max(50),
+        name: Joi.string().required().max(255),
+        description: Joi.string().optional(),
+        price: Joi.number().required().positive(),
+        image: Joi.string().optional().uri(),
+        colors: Joi.array().items(Joi.string()).optional(),
+        inStock: Joi.boolean().required(),
+        quantity: Joi.number().required().min(0),
+      })
+    )
+    .required(),
+});
+
+export const clientRegisterSchema = Joi.object({
+  email: Joi.string().email().optional(),
+  phone: Joi.string().optional(),
+}).or('email', 'phone');
+
+export const clientLoginSchema = Joi.object({
+  email: Joi.string().email().optional(),
+  phone: Joi.string().optional(),
+}).or('email', 'phone');
+
 export const validateRequest = (schema: Joi.Schema, data: any) => {
   const { error, value } = schema.validate(data);
   if (error) {

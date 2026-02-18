@@ -5,6 +5,27 @@ import { errorHandler } from '../utils/errors';
 
 const router = Router();
 
+router.get('/', async (req: Request, res: Response) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit as string) || 100, 500);
+    const offset = parseInt(req.query.offset as string) || 0;
+
+    const products = await ProductService.getAll(limit, offset);
+
+    res.json({
+      success: true,
+      data: products,
+      pagination: { limit, offset },
+    });
+  } catch (error) {
+    const err = errorHandler(error);
+    res.status(err.statusCode).json({
+      success: false,
+      error: { message: err.message },
+    });
+  }
+});
+
 router.post('/search', async (req: Request, res: Response) => {
   try {
     const { code } = validateRequest(productSearchSchema, req.body);
