@@ -1208,3 +1208,185 @@
     at async handle (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:89:17)
 [error] 
 [error] Error: There was an error deploying functions
+[debug] [2026-02-18T04:38:00.713Z] ----------------------------------------------------------------------
+[debug] [2026-02-18T04:38:00.714Z] Command:       /Users/alejandrosilva/.nvm/versions/node/v20.19.0/bin/node /Users/alejandrosilva/.nvm/versions/node/v20.19.0/bin/firebase deploy --only functions --project aivo-4jxhn9zkzwiw-4402 --non-interactive --force
+[debug] [2026-02-18T04:38:00.715Z] CLI Version:   14.22.0
+[debug] [2026-02-18T04:38:00.715Z] Platform:      darwin
+[debug] [2026-02-18T04:38:00.715Z] Node Version:  v20.19.0
+[debug] [2026-02-18T04:38:00.715Z] Time:          Wed Feb 18 2026 01:38:00 GMT-0300 (Uruguay Standard Time)
+[debug] [2026-02-18T04:38:00.715Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-18T04:38:00.808Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-18T04:38:00.980Z] Running auto auth
+[debug] [2026-02-18T04:38:00.981Z] [iam] checking project aivo-4jxhn9zkzwiw-4402 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-02-18T04:38:00.982Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:00.983Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions [none]
+[debug] [2026-02-18T04:38:00.983Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions x-goog-quota-user=projects/aivo-4jxhn9zkzwiw-4402
+[debug] [2026-02-18T04:38:00.983Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-18T04:38:01.908Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions 200
+[debug] [2026-02-18T04:38:01.909Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-18T04:38:01.909Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:01.910Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/serviceAccounts/aivo-4jxhn9zkzwiw-4402@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-02-18T04:38:01.910Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/serviceAccounts/aivo-4jxhn9zkzwiw-4402@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-02-18T04:38:02.858Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/serviceAccounts/aivo-4jxhn9zkzwiw-4402@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-02-18T04:38:02.859Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/serviceAccounts/aivo-4jxhn9zkzwiw-4402@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'aivo-4jxhn9zkzwiw-4402'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm run build
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2026-02-18T04:38:04.116Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:04.116Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 [none]
+[debug] [2026-02-18T04:38:04.339Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 200
+[debug] [2026-02-18T04:38:04.339Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 {"projectNumber":"781811004685","projectId":"aivo-4jxhn9zkzwiw-4402","lifecycleState":"ACTIVE","name":"AIVO - aivo-4jxhn9zkzwiw-4402","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-02-18T04:08:06.427336Z","parent":{"type":"organization","id":"283194625711"}}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-02-18T04:38:04.343Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:04.343Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/adminSdkConfig [none]
+[debug] [2026-02-18T04:38:04.907Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/adminSdkConfig 200
+[debug] [2026-02-18T04:38:04.908Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/adminSdkConfig {"projectId":"aivo-4jxhn9zkzwiw-4402","storageBucket":"aivo-4jxhn9zkzwiw-4402.firebasestorage.app"}
+[debug] [2026-02-18T04:38:04.909Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:04.909Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/configs [none]
+[debug] [2026-02-18T04:38:05.998Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/configs 200
+[debug] [2026-02-18T04:38:05.998Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/aivo-4jxhn9zkzwiw-4402/configs {}
+[debug] [2026-02-18T04:38:06.000Z] Validating nodejs source
+[warn] ⚠  functions: Runtime Node.js 20 will be deprecated on 2026-04-30 and will be decommissioned on 2026-10-30, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy 
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-02-18T04:38:06.617Z] > [functions] package.json contents: {
+  "name": "market-uy-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Market Uy self-checkout ordering system",
+  "main": "dist/index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^5.0.1",
+    "joi": "^17.11.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "@types/supertest": "^6.0.3",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
+[debug] [2026-02-18T04:38:06.617Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2026-02-18T04:38:06.618Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-02-18T04:38:06.626Z] Found firebase-functions binary at '/private/tmp/aivo-projects/4JxhN9zKZwIWf3uWxgJd/backend/node_modules/.bin/firebase-functions'
+[info] Serving at port 8381
+
+[info] Firebase initialized successfully
+
+[debug] [2026-02-18T04:38:06.916Z] Got response from /__/functions.yaml {"endpoints":{"api":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"api"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2026-02-18T04:38:10.939Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-18T04:38:10.940Z] Running auto auth
+[debug] [2026-02-18T04:38:10.940Z] [iam] checking project aivo-4jxhn9zkzwiw-4402 for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2026-02-18T04:38:10.940Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:10.940Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions [none]
+[debug] [2026-02-18T04:38:10.940Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions x-goog-quota-user=projects/aivo-4jxhn9zkzwiw-4402
+[debug] [2026-02-18T04:38:10.941Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2026-02-18T04:38:11.815Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions 200
+[debug] [2026-02-18T04:38:11.815Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2026-02-18T04:38:11.817Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:11.818Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/aivo-4jxhn9zkzwiw-4402/instances pageSize=100&pageToken=
+[debug] [2026-02-18T04:38:12.917Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/aivo-4jxhn9zkzwiw-4402/instances 200
+[debug] [2026-02-18T04:38:12.917Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/aivo-4jxhn9zkzwiw-4402/instances {}
+[info] i  functions: preparing . directory for uploading... 
+[info] i  functions: packaged /private/tmp/aivo-projects/4JxhN9zKZwIWf3uWxgJd/backend (139.38 KB) for uploading 
+[debug] [2026-02-18T04:38:13.018Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:13.018Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions [none]
+[debug] [2026-02-18T04:38:14.005Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions 200
+[debug] [2026-02-18T04:38:14.005Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions {}
+[debug] [2026-02-18T04:38:14.006Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:14.006Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2026-02-18T04:38:15.340Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions 200
+[debug] [2026-02-18T04:38:15.340Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/aivo-4jxhn9zkzwiw-4402/locations/-/functions {"functions":[{"name":"projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/functions/api","buildConfig":{"build":"projects/781811004685/locations/us-central1/builds/697823e7-7f09-45c8-a5f9-e66d739b0039","runtime":"nodejs20","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-sources-781811004685-us-central1","object":"api/function-source.zip","generation":"1771388425823406"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRepository":"projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/repositories/gcf-artifacts","sourceProvenance":{"resolvedStorageSource":{"bucket":"gcf-v2-sources-781811004685-us-central1","object":"api/function-source.zip","generation":"1771388425823406"}},"dockerRegistry":"ARTIFACT_REGISTRY","serviceAccount":"projects/aivo-4jxhn9zkzwiw-4402/serviceAccounts/781811004685-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"state":"UNKNOWN","updateTime":"2026-02-18T04:33:09.949256281Z","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"fefae053e47f938c777cd98d25d9b418ed890a88"},"stateMessages":[{"severity":"ERROR","type":"CloudRunServiceNotFound","message":"Cloud Run service projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/services/api for the function was not found. The function will not work correctly. Please redeploy."}],"environment":"GEN_2","url":"https://us-central1-aivo-4jxhn9zkzwiw-4402.cloudfunctions.net/api","createTime":"2026-02-18T04:20:26.657466396Z","satisfiesPzi":true}]}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2026-02-18T04:38:15.344Z] No OAuth tokens found
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2026-02-18T04:38:15.344Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:15.344Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-18T04:38:15.344Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/pubsub.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/781811004685
+[debug] [2026-02-18T04:38:15.345Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/pubsub.googleapis.com:generateServiceIdentity {}
+[debug] [2026-02-18T04:38:15.346Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-18T04:38:15.346Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/eventarc.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/781811004685
+[debug] [2026-02-18T04:38:15.346Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/eventarc.googleapis.com:generateServiceIdentity {}
+[debug] [2026-02-18T04:38:16.439Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-18T04:38:16.439Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-781811004685@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"106210261091979292001"}}
+[debug] [2026-02-18T04:38:16.448Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-18T04:38:16.448Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/781811004685/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-781811004685@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"103474511910076932089"}}
+[debug] [2026-02-18T04:38:16.451Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:16.451Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 [none]
+[debug] [2026-02-18T04:38:16.670Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 200
+[debug] [2026-02-18T04:38:16.670Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402 {"projectNumber":"781811004685","projectId":"aivo-4jxhn9zkzwiw-4402","lifecycleState":"ACTIVE","name":"AIVO - aivo-4jxhn9zkzwiw-4402","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-02-18T04:08:06.427336Z","parent":{"type":"organization","id":"283194625711"}}
+[debug] [2026-02-18T04:38:16.671Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:16.671Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/781811004685 [none]
+[debug] [2026-02-18T04:38:17.220Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/781811004685 200
+[debug] [2026-02-18T04:38:17.220Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/781811004685 {"kind":"compute#project","id":"7056946993447863203","creationTimestamp":"2026-02-17T20:17:16.852-08:00","name":"aivo-4jxhn9zkzwiw-4402","commonInstanceMetadata":{"kind":"compute#metadata","fingerprint":"qd1iZwPfUZ4="},"quotas":[{"metric":"SNAPSHOTS","limit":1000,"usage":0},{"metric":"NETWORKS","limit":5,"usage":1},{"metric":"FIREWALLS","limit":100,"usage":4},{"metric":"IMAGES","limit":100,"usage":0},{"metric":"STATIC_ADDRESSES","limit":8,"usage":0},{"metric":"ROUTES","limit":200,"usage":0},{"metric":"FORWARDING_RULES","limit":15,"usage":0},{"metric":"TARGET_POOLS","limit":50,"usage":0},{"metric":"HEALTH_CHECKS","limit":75,"usage":0},{"metric":"IN_USE_ADDRESSES","limit":4,"usage":0},{"metric":"TARGET_INSTANCES","limit":50,"usage":0},{"metric":"TARGET_HTTP_PROXIES","limit":10,"usage":0},{"metric":"URL_MAPS","limit":10,"usage":0},{"metric":"BACKEND_SERVICES","limit":50,"usage":0},{"metric":"INSTANCE_TEMPLATES","limit":100,"usage":0},{"metric":"TARGET_VPN_GATEWAYS","limit":5,"usage":0},{"metric":"VPN_TUNNELS","limit":10,"usage":0},{"metric":"BACKEND_BUCKETS","limit":3,"usage":0},{"metric":"ROUTERS","limit":10,"usage":0},{"metric":"TARGET_SSL_PROXIES","limit":10,"usage":0},{"metric":"TARGET_HTTPS_PROXIES","limit":10,"usage":0},{"metric":"SSL_CERTIFICATES","limit":10,"usage":0},{"metric":"SUBNETWORKS","limit":100,"usage":0},{"metric":"TARGET_TCP_PROXIES","limit":10,"usage":0},{"metric":"CPUS_ALL_REGIONS","limit":12,"usage":0},{"metric":"SECURITY_POLICIES","limit":0,"usage":0},{"metric":"SECURITY_POLICY_RULES","limit":0,"usage":0},{"metric":"XPN_SERVICE_PROJECTS","limit":1000,"usage":0},{"metric":"PACKET_MIRRORINGS","limit":20,"usage":0},{"metric":"NETWORK_ENDPOINT_GROUPS","limit":100,"usage":0},{"metric":"INTERCONNECTS","limit":6,"usage":0},{"metric":"SSL_POLICIES","limit":10,"usage":0},{"metric":"GLOBAL_INTERNAL_ADDRESSES","limit":5000,"usage":0},{"metric":"VPN_GATEWAYS","limit":5,"usage":0},{"metric":"MACHINE_IMAGES","limit":100,"usage":0},{"metric":"SECURITY_POLICY_CEVAL_RULES","limit":0,"usage":0},{"metric":"GPUS_ALL_REGIONS","limit":0,"usage":0},{"metric":"EXTERNAL_VPN_GATEWAYS","limit":5,"usage":0},{"metric":"PUBLIC_ADVERTISED_PREFIXES","limit":1,"usage":0},{"metric":"PUBLIC_DELEGATED_PREFIXES","limit":10,"usage":0},{"metric":"STATIC_BYOIP_ADDRESSES","limit":128,"usage":0},{"metric":"NETWORK_FIREWALL_POLICIES","limit":10,"usage":0},{"metric":"INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES","limit":15,"usage":0},{"metric":"GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES","limit":15,"usage":0},{"metric":"GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES","limit":50,"usage":0},{"metric":"GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES","limit":50,"usage":0},{"metric":"GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES","limit":50,"usage":0},{"metric":"GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES","limit":100,"usage":0}],"selfLink":"https://www.googleapis.com/compute/v1/projects/aivo-4jxhn9zkzwiw-4402","defaultServiceAccount":"781811004685-compute@developer.gserviceaccount.com","xpnProjectStatus":"UNSPECIFIED_XPN_PROJECT_STATUS","defaultNetworkTier":"PREMIUM","vmDnsSetting":"ZONAL_ONLY","cloudArmorTier":"CA_STANDARD"}
+[debug] [2026-02-18T04:38:17.223Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:17.223Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/billingInfo [none]
+[debug] [2026-02-18T04:38:18.336Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/billingInfo 200
+[debug] [2026-02-18T04:38:18.336Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/billingInfo {"name":"projects/aivo-4jxhn9zkzwiw-4402/billingInfo","projectId":"aivo-4jxhn9zkzwiw-4402","billingAccountName":"billingAccounts/01DF6E-0B7675-CA3239","billingEnabled":true}
+[info] i  functions: updating Node.js 20 (2nd Gen) function api(us-central1)... 
+[debug] [2026-02-18T04:38:18.343Z] Precondition failed. Cannot update a GCFv2 function without storage
+[debug] [2026-02-18T04:38:18.344Z] Total Function Deployment time: 1
+[debug] [2026-02-18T04:38:18.344Z] 1 Functions Deployed
+[debug] [2026-02-18T04:38:18.344Z] 1 Functions Errored
+[debug] [2026-02-18T04:38:18.344Z] 0 Function Deployments Aborted
+[debug] [2026-02-18T04:38:18.344Z] Average Function Deployment time: 0
+[info] 
+[info] Functions deploy had errors with the following functions:
+	api(us-central1)
+[debug] [2026-02-18T04:38:18.345Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[debug] [2026-02-18T04:38:18.346Z] No OAuth tokens found
+[debug] [2026-02-18T04:38:18.346Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/repositories/gcf-artifacts [none]
+[debug] [2026-02-18T04:38:19.551Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/repositories/gcf-artifacts 200
+[debug] [2026-02-18T04:38:19.551Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1/projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/repositories/gcf-artifacts {"name":"projects/aivo-4jxhn9zkzwiw-4402/locations/us-central1/repositories/gcf-artifacts","format":"DOCKER","description":"This repository is created and used by Cloud Functions for storing function docker images.","labels":{"goog-managed-by":"cloudfunctions"},"createTime":"2026-02-18T04:20:36.195749Z","updateTime":"2026-02-18T04:21:22.598259Z","mode":"STANDARD_REPOSITORY","cleanupPolicies":{"firebase-functions-cleanup":{"id":"firebase-functions-cleanup","action":"DELETE","condition":{"tagState":"ANY","olderThan":"86400s"}}},"vulnerabilityScanningConfig":{"lastEnableTime":"2026-02-18T04:20:26.840394600Z","enablementState":"SCANNING_DISABLED","enablementStateReason":"API containerscanning.googleapis.com is not enabled."},"satisfiesPzi":true,"registryUri":"us-central1-docker.pkg.dev/aivo-4jxhn9zkzwiw-4402/gcf-artifacts"}
+[debug] [2026-02-18T04:38:19.552Z] Functions deploy failed.
+[debug] [2026-02-18T04:38:19.552Z] {}
+[debug] [2026-02-18T04:38:19.553Z] Error: Precondition failed
+    at Fabricator.updateV2Function (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:394:19)
+    at Fabricator.updateEndpoint (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:160:24)
+    at /Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:110:71
+    at handle (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:89:23)
+    at Fabricator.applyChangeset (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:110:26)
+    at /Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:69:40
+    at Array.map (<anonymous>)
+    at Fabricator.applyPlan (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:68:54)
+    at release (/Users/alejandrosilva/.nvm/versions/node/v20.19.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/index.js:76:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: There was an error deploying functions
